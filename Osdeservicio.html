@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Orden de Servicio Electrónica (OS-e)</title>
+    <!-- Vincular las fuentes y el CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Os.css">
+</head>
+<body>
+    <div class="container">
+        <h1>ORDEN DE SERVICIO ELECTRÓNICA (OS-e)</h1>
+
+        <!-- Formulario principal -->
+        <form>
+            <!-- Información General -->
+            <h2>Información General</h2>
+            <div class="horizontal-fields">
+                <div class="form-group">
+                    <label for="folio">FOLIO N°</label>
+                    <input type="text" name="folio" id="folio" required>
+                </div>
+                <div class="form-group">
+                    <label for="fecha">FECHA</label>
+                    <input type="date" name="fecha" id="fecha" required>
+                </div>
+                <div class="form-group">
+                    <label for="cliente">CLIENTE</label>
+                    <input list="clientes" name="cliente" id="cliente" required>
+                    <datalist id="clientes">
+                        <option value="Sopraval"></option>
+                        <option value="Lo miranda cerdo"></option>
+                        <option value="Lo miranda aves"></option>
+                        <option value="San Vicente"></option>
+                        <option value="Walmart"></option>
+                        <option value="Chile Beef"></option>
+                        <option value="Castaño"></option>
+                        <option value="Don Pollo"></option>
+                    </datalist>
+                </div>
+                
+            </div>
+            <div class="horizontal-fields">
+                <div class="form-group">
+                    <label for="solicitado_por">SOLICITADO POR</label>
+                    <input type="text" name="solicitado_por" id="solicitado_por" required>
+                </div>
+                <div class="form-group">
+                    <label for="tipo_servicio">TIPO DE SERVICIO</label>
+                    <select name="tipo_servicio" id="tipo_servicio" required>
+                        <option value="">Seleccione</option>
+                        <option value="Plan de continuidad">Plan de continuidad</option>
+                        <option value="Mantenimiento">Mantenimiento</option>
+                        <option value="Reparacion">Reparación</option>
+                        <option value="Instalacion">Instalación</option>
+                        <option value="Asistencia programada">Asistencia programada</option>
+                        <option value="Puesta en marcha">Puesta en marcha</option>
+                        <option value="Pruebas">Pruebas</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ot_cliente">OT CLIENTE</label>
+                    <input type="text" name="ot_cliente" id="ot_cliente" required>
+                </div>
+            </div>
+            <div class="horizontal-fields">
+                <div class="form-group">
+                    <label for="marca">MARCA</label>
+                    <input type="text" name="marca" id="marca" required>
+                </div>
+                <div class="form-group">
+                    <label for="horometro">HORÓMETRO/CICLOS</label>
+                    <input type="text" name="horometro" id="horometro" required>
+                </div>
+                <div class="form-group">
+                    <label for="modelo">MODELO</label>
+                    <input type="text" name="modelo" id="modelo" required>
+                </div>
+            </div>
+            <div class="horizontal-fields">
+                <div class="form-group">
+                    <label for="serie">SERIE</label>
+                    <input type="text" name="serie" id="serie" required>
+                </div>
+                <div class="form-group">
+                    <label for="cc">C/C</label>
+                    <select name="cc" id="cc" required>
+                        <option value="">Seleccione</option>
+                        <option value="si">SI</option>
+                        <option value="no">NO</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cotizacion">N° DE COTIZACIÓN</label>
+                    <input type="text" name="cotizacion" id="cotizacion" required>
+                </div>
+            </div>
+
+            <label for="falla_reportada">FALLA REPORTADA POR CLIENTE</label>
+            <textarea name="falla_reportada" id="falla_reportada" rows="3" required></textarea>
+
+            <!-- Check List -->
+            <h2>Check List</h2>
+            <div class="checklist-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>INSPECCIÓN VISUAL PRIMARIA</th>
+                            <th>OK</th>
+                            <th>Detalles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Revisión estructura</td>
+                            <td><input type="checkbox" name="estructura_ok" id="estructura_ok"></td>
+                            <td>
+                                <input type="text" name="estructura_detalles" id="estructura_detalles" placeholder="Detalles" value="Sin detalle">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Revisión cintas</td>
+                            <td><input type="checkbox" name="cintas_ok" id="cintas_ok"></td>
+                            <td><input type="text" name="cintas_detalles" id="cintas_detalles" placeholder="Detalles" value="Sin detalle"></td>
+                        </tr>
+                        <tr>
+                            <td>Revisión pantalla</td>
+                            <td><input type="checkbox" name="pantalla_ok" id="pantalla_ok"></td>
+                            <td><input type="text" name="pantalla_detalles" id="pantalla_detalles" placeholder="Detalles" value="Sin detalle"></td>
+                        </tr>
+                        <tr>
+                            <td>Revisión sist. Seguridad</td>
+                            <td><input type="checkbox" name="seguridad_ok" id="seguridad_ok"></td>
+                            <td><input type="text" name="seguridad_detalles" id="seguridad_detalles" placeholder="Detalles" value="Sin detalle"></td>
+                        </tr>
+                        <tr>
+                            <td>Piezas en posición</td>
+                            <td><input type="checkbox" name="piezas_ok" id="piezas_ok"></td>
+                            <td><input type="text" name="piezas_detalles" id="piezas_detalles" placeholder="Detalles" value="Sin detalle"></td>
+                        </tr>
+                        <tr>
+                            <td>Limpieza</td>
+                            <td><input type="checkbox" name="limpieza_ok" id="limpieza_ok"></td>
+                            <td><input type="text" name="limpieza_detalles" id="limpieza_detalles" placeholder="Detalles" value="Sin detalle"></td>
+                        </tr>
+                        <tr>
+                            <td>Insumo original</td>
+                            <td><input type="checkbox" name="insumo_ok" id="insumo_ok"></td>
+                            <td><input type="text" name="insumo_detalles" id="insumo_detalles" placeholder="Detalles" value="Sin detalle"></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tabla de Códigos y Descripción -->
+            <h2>Repuestos</h2>
+            <div class="centered-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Descripción</th>
+                            <th>Cantidad</th>
+                            <th>Documento de Despacho</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" name="codigo1" id="codigo1" required></td>
+                            <td><input type="text" name="descripcion1" id="descripcion1" required></td>
+                            <td><input type="text" name="cantidad1" id="cantidad1" required></td>
+                            <td><input type="text" name="despacho1" id="despacho1" required></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="codigo2" id="codigo2" required></td>
+                            <td><input type="text" name="descripcion2" id="descripcion2" required></td>
+                            <td><input type="text" name="cantidad2" id="cantidad2" required></td>
+                            <td><input type="text" name="despacho2" id="despacho2" required></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Diagnóstico y Observaciones -->
+            <h2>Diagnóstico y Observaciones</h2>
+            <textarea name="diagnostico_observaciones" id="diagnostico_observaciones" rows="4" required></textarea>
+
+            <!-- Trabajo Desarrollado -->
+            <h2>Trabajo Desarrollado</h2>
+            <textarea name="trabajo_desarrollado" id="trabajo_desarrollado" rows="4" required></textarea>
+
+            <!-- Sección de imágenes -->
+            <h2>Carga de Imágenes</h2>
+
+            <div class="image-upload">
+                <div class="image-upload-container">
+                    <label for="imagen1">Subir Imagen 1</label>
+                    <input type="file" id="imagen1" name="imagen1" accept="image/*" onchange="previewImage(event, 'preview1')" required>
+                    <img id="preview1" src="#" alt="Previsualización" style="display: none;">
+                    <button type="button" onclick="removeImage('imagen1', 'preview1')">Eliminar</button>
+                    <br>
+                    <label for="imagen1_text">Descripción</label>
+                    <input type="text" id="imagen1_text" name="imagen1_text" placeholder="Ingrese una descripción">
+                </div>
+                
+                <div class="image-upload-container">
+                    <label for="imagen2">Subir Imagen 2</label>
+                    <input type="file" id="imagen2" name="imagen2" accept="image/*" onchange="previewImage(event, 'preview2')" required>
+                    <img id="preview2" src="#" alt="Previsualización" style="display: none;">
+                    <button type="button" onclick="removeImage('imagen2', 'preview2')">Eliminar</button>
+                    <br>
+                    <label for="imagen2_text">Descripción</label>
+                    <input type="text" id="imagen2_text" name="imagen2_text" placeholder="Ingrese una descripción">
+                </div>
+                
+            </div>
+
+            <!-- Contenedor Dual para Registro de Tiempos e Información de Ingenieros -->
+            <div class="dual-section">
+                
+                <!-- Sección de Registro de Tiempos -->
+                <div class="time-recording">
+                    <h2>Registro de Tiempos</h2>
+                    <div class="centered-container">
+                        <table class="timing-table">
+                            <thead>
+                                <tr>
+                                    <th>Salida ST</th>
+                                    <th>Llegada a Planta</th>
+                                    <th>Salida de Planta</th>
+                                    <th>Llegada a ST</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" name="salida_st" id="salida_st" placeholder="HH:MM" required></td>
+                                    <td><input type="text" name="llegada_planta" id="llegada_planta" placeholder="HH:MM" required></td>
+                                    <td><input type="text" name="salida_planta" id="salida_planta" placeholder="HH:MM" required></td>
+                                    <td><input type="text" name="llegada_st" id="llegada_st" placeholder="HH:MM" required></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Sección de Información de Ingenieros -->
+                <div class="engineer-information">
+                    <h2>Información de Ingenieros y Cliente</h2>
+                    <div class="engineer-box">
+                        <!-- Ingeniero 1 -->
+                        <div class="engineer-sub-box">
+                            <h3>Ingenieros</h3>
+                            <div class="form-group">
+                                <label for="ingeniero1">Seleccionar Ingeniero</label>
+                                <select name="ingeniero1" id="ingeniero1" required>
+                                    <option value="">Seleccione</option>
+                                    <option value="ingeniero1">Ingeniero 1</option>
+                                    <option value="ingeniero2">Ingeniero 2</option>
+                                    <option value="ingeniero3">Ingeniero 3</option>
+                                </select>
+                            </div>
+                            <label for="ingeniero2">Seleccionar Ingeniero</label>
+                            <select name="ingeniero2" id="ingeniero2" required>
+                                <option value="">Seleccione</option>
+                                <option value="ingeniero1">Ingeniero 1</option>
+                                <option value="ingeniero2">Ingeniero 2</option>
+                                <option value="ingeniero3">Ingeniero 3</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Ingeniero 2 -->
+                        <div class="engineer-sub-box">
+                            <h3>Informacion Cliente</h3>
+                            <div class="form-group">
+                              
+            
+                            <div class="form-group">
+                                <label for="nombre2">Nombre</label>
+                                <input type="text" name="nombre2" id="nombre2" placeholder="Nombre del Ingeniero" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email2">Email</label>
+                                <input type="email" name="email2" id="email2" placeholder="email@ejemplo.com" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
+
+            <!-- Firma Técnica y Cliente -->
+            <h2>Firmas</h2>
+            <div class="firma-container">
+                <div class="firma">
+                    <p>FIRMA TÉCNICO</p>
+                    <div class="firma-digital">
+                        <canvas id="firmaTecnico" width="300" height="150"></canvas>
+                        <button type="button" onclick="limpiarFirma('firmaTecnico')">Limpiar</button>
+                    </div>
+                </div>
+                <div class="firma">
+                    <p>FIRMA CLIENTE</p>
+                    <div class="firma-digital">
+                        <canvas id="firmaCliente" width="300" height="150"></canvas>
+                        <button type="button" onclick="limpiarFirma('firmaCliente')">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón para generar el PDF -->
+            <div class="button-container">
+                <button type="button" id="btnGenerarPDF">Generar OS</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- Incluye las bibliotecas necesarias -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/4.0.0/signature_pad.umd.min.js"></script>
+    <!-- Script para previsualización y eliminación de imágenes -->
+    <script>
+        function previewImage(event, previewId) {
+            var reader = new FileReader();
+            reader.onload = function(){
+                var output = document.getElementById(previewId);
+                output.src = reader.result;
+                output.style.display = 'block';
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function removeImage(inputId, previewId) {
+            document.getElementById(inputId).value = "";
+            var output = document.getElementById(previewId);
+            output.src = "#";
+            output.style.display = 'none';
+        }
+    </script>
+
+    <!-- Script para limpiar firmas -->
+    <script>
+        function limpiarFirma(idCanvas) {
+            var canvas = document.getElementById(idCanvas);
+            var ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // Función para capturar la firma (opcional)
+        // Puedes implementar una librería como Signature Pad para mejorar la funcionalidad
+    </script>
+    <script>
+        const signaturePad = new SignaturePad(document.getElementById("firmaTecnico"));
+        const signaturePadCliente = new SignaturePad(document.getElementById("firmaCliente"));
+    
+        function limpiarFirma(idCanvas) {
+            if (idCanvas === 'firmaTecnico') signaturePad.clear();
+            if (idCanvas === 'firmaCliente') signaturePadCliente.clear();
+        }
+    </script>
+    
+
+    <!-- Tu archivo JS -->
+    <script src="PDF_Os.js"></script>
+    <!-- Bibliotecas necesarias -->
+
+</body>
+</html>

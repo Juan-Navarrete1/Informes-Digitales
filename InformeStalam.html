@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <link rel="stylesheet" href="estilos.css">
+   
+</head>
+
+<body>
+
+    <div class="container">
+        <form id="formularioServicio" action="procesar_formulario.php" method="post" enctype="multipart/form-data">
+            <h1>INFORME PLAN DE CONTINUIDAD</h1>
+    
+            <!-- Agrupamos los campos en filas de tres -->
+            <div class="horizontal-fields">
+                <div class="form-group">
+                    <label for="planta">Planta:</label>
+                    <input list="plantas" id="planta" name="planta" placeholder="Escriba o seleccione..." required>
+                    <datalist id="plantas">
+                       
+                        <option value="Walmart"></option>
+                        <option value="TD Carnes"></option>
+                        <option value="Interandina"></option>
+                    </datalist>
+                </div>
+    
+                <div class="form-group">
+                    <label for="tipo_servicio">Tipo de Servicio:</label>
+                    <input list="tipos_servicio" id="tipo_servicio" name="tipo_servicio" placeholder="Escriba o seleccione..." required>
+                    <datalist id="tipos_servicio">
+                        <option value="Plan de continuidad"></option>
+                        <option value="Mantenimiento"></option>
+                        <option value="Reparación"></option>
+                        <option value="Instalación"></option>
+                        <option value="Asistencia programada"></option>
+                        <option value="Puesta en marcha"></option>
+                    </datalist>
+                </div>
+    
+                <div class="form-group">
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" id="fecha" name="fecha" required>
+                </div>
+            </div>
+    
+            <div class="horizontal-fields">
+                <div class="form-group">
+                    <label for="modelo">Modelo:</label>
+                    <select id="modelo" name="modelo" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="GTR">RF2 85KW</option>
+                        <option value="GTRe">RF1 7kw</option>
+                        
+                    </select>
+                </div>
+    
+                <div class="form-group">
+                    <label for="numero_serie">N.º de Serie:</label>
+                    <input type="text" id="numero_serie" name="numero_serie" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="Maquina">Maquina:</label>
+                    <select id="Maquina" name="Maquina" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="Descongeladora">Descongeladora</option>
+                        
+                </div>
+            </div>
+    
+            <div class="horizontal-fields">
+                <div class="form-group">
+                    <label for="Marca">Marca:</label>
+                    <select id="Marca" name="Marca" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="Stalam">Stalam</option>
+                    </select>
+                </div>
+    
+                <div class="form-group">
+                    <label for="Año">Año:</label>
+                    <input type="text" id="Año" name="Año" required>
+                </div>
+            </div>
+
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" rows="4" cols="50" placeholder="Ingrese la descripción aquí..."></textarea><br>
+     
+
+    <div class="image-upload">
+        <div>
+            <label for="imagen5">Maquina a inspeccionar</label>
+            <input type="file" id="imagen5" name="imagen5" accept="image/*" onchange="previewImage(event, 'preview5')">
+            <img id="preview5" alt="Previsualización de la imagen">
+        </div>
+    </div>
+    
+    <div class="container1">
+    <h2>Resumen Ejecutivo</h2>
+    </div>
+
+    <!-- Campo para el estado de entrega de la máquina -->
+    <label for="estadoEntrega">Estado de entrega de la máquina:</label>
+    <textarea id="estadoEntrega" rows="4" cols="50"></textarea>
+
+    <!-- Campo para las tareas realizadas -->
+    <label for="tareasRealizadas">Tareas realizadas:</label>
+    <textarea id="tareasRealizadas" rows="4" cols="50"></textarea>
+
+    <!-- Campo para texto adicional -->
+    <label for="masTexto">Observacion operadores o mantenincion:</label>
+    <textarea id="masTexto" rows="4" cols="50"></textarea>
+
+
+
+            <!-- Tabla de Revisión Estructural -->
+            <div class="container1">
+            <h2>Revisión Estructural</h2>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Limpieza</th>
+                        <th>Estado de cintas</th>
+                        <th>Tableros de control</th>
+                        <th>Motores</th>
+                        <th>Sistema neumático</th>
+                        <th>Estado matriz</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox" name="limpieza"></td>
+                        <td><input type="checkbox" name="estado_cintas"></td>
+                        <td><input type="checkbox" name="tableros_control"></td>
+                        <td><input type="checkbox" name="motores"></td>
+                        <td><input type="checkbox" name="sistema_neumatico"></td>
+                        <td><input type="checkbox" name="estado_matriz"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Tabla de Revisión de Puertas -->
+            <div class="container1">
+            <h2>Revisión de Puertas</h2>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Zona de puerta</th>
+                        <th>Estado</th>
+                        <th>Estatus</th>
+                        <th>Observación</th>
+                        <th>Recomendación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Puerta frontal</td>
+                        <td><input type="checkbox" name="estado_puerta_1"></td>
+                        <td>
+                            <select name="estatus_puerta_1">
+                                <option value="Operativo">Operativo</option>
+                                <option value="No operativo">No operativo</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input list="opciones_observacion_puerta_1" name="observacion_puerta_1" placeholder="Escriba o seleccione una opción" value="Sin Observación">
+                        
+                        </td>
+                        <td><input type="text" name="recomendacion_puerta_1"placeholder="Escriba o seleccione una opción" value="No aplica"></td>
+                    </tr>
+                    <tr>
+                        <td>Puerta trasera</td>
+                        <td><input type="checkbox" name="estado_puerta_2"></td>
+                        <td>
+                            <select name="estatus_puerta_2">
+                                <option value="Operativo">Operativo</option>
+                                <option value="No operativo">No operativo</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input list="opciones_observacion_puerta_2" name="observacion_puerta_2" placeholder="Escriba o seleccione una opción" value="Sin Observación">
+                            
+                        </td>
+                        <td><input type="text" name="recomendacion_puerta_2"placeholder="Escriba o seleccione una opción" value="No aplica"></td>
+                    </tr>
+                    <tr>
+                        <td>Puerta salida superior</td>
+                        <td><input type="checkbox" name="estado_puerta_3"></td>
+                        <td>
+                            <select name="estatus_puerta_3">
+                                <option value="Operativo">Operativo</option>
+                                <option value="No operativo">No operativo</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input list="opciones_observacion_puerta_3" name="observacion_puerta_3" placeholder="Escriba o seleccione una opción" value="Sin Observación">
+                           
+                        </td>
+                        <td><input type="text" name="recomendacion_puerta_3"placeholder="Escriba o seleccione una opción" value="No aplica"></td>
+                    </tr>
+                    <tr>
+                        <td>Puerta entrada superior</td>
+                        <td><input type="checkbox" name="estado_puerta_4"></td>
+                        <td>
+                            <select name="estatus_puerta_4">
+                                <option value="Operativo">Operativo</option>
+                                <option value="No operativo">No operativo</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input list="opciones_observacion_puerta_4" name="observacion_puerta_4" placeholder="Escriba o seleccione una opción" value="Sin Observación">
+                          
+                        </td>
+                        <td><input type="text" name="recomendacion_puerta_4"placeholder="Escriba o seleccione una opción" value="No aplica"></td>
+                    </tr>
+                    <tr>
+                        <td>Puerta entrada inferior</td>
+                        <td><input type="checkbox" name="estado_puerta_5"></td>
+                        <td>
+                            <select name="estatus_puerta_5">
+                                <option value="Operativo">Operativo</option>
+                                <option value="No operativo">No operativo</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input list="opciones_observacion_puerta_5" name="observacion_puerta_5" placeholder="Escriba o seleccione una opción" value="Sin Observación">
+                
+                        </td>
+                        <td><input type="text" name="recomendacion_puerta_5"placeholder="Escriba o seleccione una opción" value="No aplica"></td>
+                    </tr>
+                    <tr>
+                        <td>Puerta frontal inferior</td>
+                        <td><input type="checkbox" name="estado_puerta_6"></td>
+                        <td>
+                            <select name="estatus_puerta_6">
+                                <option value="Operativo">Operativo</option>
+                                <option value="No operativo">No operativo</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input list="opciones_observacion_puerta_6" name="observacion_puerta_6" placeholder="Escriba o seleccione una opción" value="Sin Observación">
+                            
+                        </td>
+                        <td><input type="text" name="recomendacion_puerta_6"placeholder="Escriba o seleccione una opción" value="No aplica"></td>
+                    </tr>
+                    <tr>
+                        <td>Puerta trasera inferior</td>
+                        <td><input type="checkbox" name="estado_puerta_7"></td>
+                        <td>
+                            <select name="estatus_puerta_7">
+                                <option value="Operativo">Operativo</option>
+                                <option value="No operativo">No operativo</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input list="opciones_observacion_puerta_7" name="observacion_puerta_7" placeholder="Escriba o seleccione una opción" value="Sin Observación">
+                            
+                        </td>
+                        <td><input type="text" name="recomendacion_puerta_7"placeholder="Escriba o seleccione una opción" value="No aplica"></td>
+                    </tr>
+                    <tr>
+                        <td>Puerta salida delantera inferior</td>
+                        <td><input type="checkbox" name="estado_puerta_8"></td>
+                        <td>
+                            <select name="estatus_puerta_8">
+                                <option value="Operativo">Operativo</option>
+                                <option value="No operativo">No operativo</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input list="opciones_observacion_puerta_8" name="observacion_puerta_8" placeholder="Escriba o seleccione una opción" value="Sin Observación">
+                           
+                        </td>
+                        <td><input type="text" name="recomendacion_puerta_8"placeholder="Escriba o seleccione una opción" value="No aplica"></td>
+                    </tr>
+                    <tr>
+                        <td>Puerta salida trasera inferior</td>
+                        <td><input type="checkbox" name="estado_puerta_9"></td>
+                        <td>
+                            <select name="estatus_puerta_9">
+                                <option value="Operativo">Operativo</option>
+                                <option value="No_operativo">No operativo</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input list="opciones_observacion_puerta_9" name="observacion_puerta_9" placeholder="Escriba o seleccione una opción" value="Sin Observación">
+                          
+                        </td>
+                        <td><input type="text" name="recomendacion_puerta_9"placeholder="Escriba o seleccione una opción" value="No aplica"></td>
+                    </tr>
+                    <tr>
+                        <td>Puerta entrada superior 2</td>
+                        <td><input type="checkbox" name="estado_puerta_10"></td>
+                        <td>
+                            <select name="estatus_puerta_10">
+                                <option value="Operativo">Operativo</option>
+                                <option value="No_operativo">No operativo</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input list="opciones_observacion_puerta_10" name="observacion_puerta_10" placeholder="Escriba o seleccione una opción" value="Sin Observación">
+                            
+                        </td>
+                        <td><input type="text" name="recomendacion_puerta_10"placeholder="Escriba o seleccione una opción" value="No aplica"></td>
+                    </tr>
+                    <tr>
+                        <td>Puerta entrada trasera inferior</td>
+                        <td><input type="checkbox" name="estado_puerta_11"></td>
+                        <td>
+                            <select name="estatus_puerta_11">
+                                <option value="Operativo">Operativo</option>
+                                <option value="No_operativo">No operativo</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input list="opciones_observacion_puerta_11" name="observacion_puerta_11" placeholder="Escriba o seleccione una opción" value="Sin Observación">
+                          
+                        </td>
+                        <td><input type="text" name="recomendacion_puerta_11"placeholder="Escriba o seleccione una opción" value="No aplica"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Tabla Safety Relay y Parada de Emergencia -->
+            <div class="container1">
+            <h2>Safety Relay y Parada de Emergencia</h2>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Elemento</th>
+                        <th>Estado</th>
+                        <th>Observación</th>
+                        <th>Recomendación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Safety Relay</td>
+                        <td>
+                            <select name="estado_safety_relay">
+                                <option value="Operativo">Operativo</option>
+                                <option value="No operativo">No operativo</option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="observacion_safety_relay"placeholder="Escriba o seleccione una opción"value="Sin Observación"></td>
+                        <td><input type="text" name="recomendacion_safety_relay"placeholder="Escriba o seleccione una opción"value="No aplica"></td>
+                    </tr>
+                    <tr>
+                        <td>Parada de Emergencia</td>
+                        <td>
+                            <select name="estado_parada_emergencia">
+                                <option value="Operativo">Operativo</option>
+                                <option value="No operativo">No operativo</option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="observacion_parada_emergencia"placeholder="Escriba o seleccione una opción"value="Sin Observación"></td>
+                        <td><input type="text" name="recomendacion_parada_emergencia"placeholder="Escriba o seleccione una opción"value="No aplica"></td>
+                    </tr>
+                    <tr>
+                        <td>Interruptor Principal</td>
+                        <td>
+                            <select name="estado_interruptor_principal">
+                                <option value="Operativo">Operativo</option>
+                                <option value="No operativo">No operativo</option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="observacion_interruptor_principal"placeholder="Escriba o seleccione una opción"value="Sin Observación"></td>
+                        <td><input type="text" name="recomendacion_interruptor_principal"placeholder="Escriba o seleccione una opción"value="No aplica"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Recuadros para insertar imágenes -->
+            <div class="container1">
+            <h2>Registro Fotográfico</h2>
+            </div>
+
+            <div class="image-upload">
+                <div>
+                    <label for="imagen1">Señal PLC puertas abiertas</label>
+                    <input type="file" id="imagen1" name="imagen1" accept="image/*" onchange="previewImage(event, 'preview1')">
+                    <img id="preview1" alt="Previsualización de la imagen">
+                </div>
+                <div>
+                    <label for="imagen2">Señal PLC puertas cerradas</label>
+                    <input type="file" id="imagen2" name="imagen2" accept="image/*" onchange="previewImage(event, 'preview2')">
+                    <img id="preview2" alt="Previsualización de la imagen">
+                </div>
+                <div>
+                    <label for="imagen3">Alarma de puertas abiertas</label>
+                    <input type="file" id="imagen3" name="imagen3" accept="image/*" onchange="previewImage(event, 'preview3')">
+                    <img id="preview3" alt="Previsualización de la imagen">
+                </div>
+                <div>
+                    <label for="imagen4">Maquina con puertas abiertas</label>
+                    <input type="file" id="imagen4" name="imagen4" accept="image/*" onchange="previewImage(event, 'preview4')">
+                    <img id="preview4" alt="Previsualización de la imagen">
+                </div>
+            </div>
+
+            <label for="observacion_fotografico">Observación:</label>
+            <textarea id="observacion_fotografico" name="observacion_fotografico" rows="5"></textarea>
+
+            <!-- Tabla Fotografía Termográficas -->
+            <div class="container1">
+            <h2>Fotografías Termográficas</h2>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Componentes Analizados</th>
+                        <th>Temperatura °C</th>
+                        <th>Rango de Trabajo Máximo °C</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Contactor</td>
+                        <td><input type="number" name="temperatura_contactor" required></td>
+                        <td>75°C</td>
+                    </tr>
+                    <tr>
+                        <td>Relé de estado sólido</td>
+                        <td><input type="number" name="temperatura_rele_estado_solido" required></td>
+                        <td>50°C</td>
+                    </tr>
+                    <tr>
+                        <td>Servo amplificador</td>
+                        <td><input type="number" name="temperatura_servo_amplificador" required></td>
+                        <td>70°C</td>
+                    </tr>
+                    <tr>
+                        <td>Safety Relay</td>
+                        <td><input type="number" name="temperatura_safety_relay_comp" required></td>
+                        <td>55°C</td>
+                    </tr>
+                    <tr>
+                        <td>VDF</td>
+                        <td><input type="number" name="temperatura_vdf" required></td>
+                        <td>70°C</td>
+                    </tr>
+                    <tr>
+                        <td>PLC</td>
+                        <td><input type="number" name="temperatura_plc" required></td>
+                        <td>55°C</td>
+                    </tr>
+                    <tr>
+                        <td>Relé 24 VDC</td>
+                        <td><input type="number" name="temperatura_rele_24vdc" required></td>
+                        <td>70°C</td>
+                    </tr>
+                    <tr>
+                        <td>Power Supply</td>
+                        <td><input type="number" name="temperatura_power_supply" required></td>
+                        <td>70°C</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Recuadros para insertar imágenes de componentes -->
+            <div class="container1">
+            <h2>Registro Fotográfico de Componentes</h2>
+            </div>
+
+            <div class="image-upload">
+                <div>
+                    <label for="imagen_contactor">Contactor</label>
+                    <input type="file" id="imagen_contactor" name="imagen_contactor" accept="image/*" onchange="previewImage(event, 'preview_contactor')">
+                    <img id="preview_contactor" alt="Previsualización de la imagen">
+                </div>
+                <div>
+                    <label for="imagen_rele_estado_solido">Relé de Estado Sólido</label>
+                    <input type="file" id="imagen_rele_estado_solido" name="imagen_rele_estado_solido" accept="image/*" onchange="previewImage(event, 'preview_rele_estado_solido')">
+                    <img id="preview_rele_estado_solido" alt="Previsualización de la imagen">
+                </div>
+                <div>
+                    <label for="imagen_servo_amplificador">Servo Amplificador</label>
+                    <input type="file" id="imagen_servo_amplificador" name="imagen_servo_amplificador" accept="image/*" onchange="previewImage(event, 'preview_servo_amplificador')">
+                    <img id="preview_servo_amplificador" alt="Previsualización de la imagen">
+                </div>
+                <div>
+                    <label for="imagen_safety_relay_comp">Safety Relay</label>
+                    <input type="file" id="imagen_safety_relay_comp" name="imagen_safety_relay_comp" accept="image/*" onchange="previewImage(event, 'preview_safety_relay_comp')">
+                    <img id="preview_safety_relay_comp" alt="Previsualización de la imagen">
+                </div>
+                <div>
+                    <label for="imagen_vdf">VDF</label>
+                    <input type="file" id="imagen_vdf" name="imagen_vdf" accept="image/*" onchange="previewImage(event, 'preview_vdf')">
+                    <img id="preview_vdf" alt="Previsualización de la imagen">
+                </div>
+                <div>
+                    <label for="imagen_plc">PLC</label>
+                    <input type="file" id="imagen_plc" name="imagen_plc" accept="image/*" onchange="previewImage(event, 'preview_plc')">
+                    <img id="preview_plc" alt="Previsualización de la imagen">
+                </div>
+                <div>
+                    <label for="imagen_rele_24vdc">Relé 24 VDC</label>
+                    <input type="file" id="imagen_rele_24vdc" name="imagen_rele_24vdc" accept="image/*" onchange="previewImage(event, 'preview_rele_24vdc')">
+                    <img id="preview_rele_24vdc" alt="Previsualización de la imagen">
+                </div>
+                <div>
+                    <label for="imagen_power_supply">Power Supply</label>
+                    <input type="file" id="imagen_power_supply" name="imagen_power_supply" accept="image/*" onchange="previewImage(event, 'preview_power_supply')">
+                    <img id="preview_power_supply" alt="Previsualización de la imagen">
+                </div>
+            </div>
+
+            <label for="observacion_componentes">Observación:</label>
+            <textarea id="observacion_componentes" name="observacion_componentes" rows="5"></textarea>
+
+            <!-- Tabla Reporte Diagnóstico -->
+            <div class="container1">
+            <h2>Reporte Diagnóstico</h2>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Componente</th>
+                        <th>Detalle</th>
+                        <th>Diagnóstico</th>
+                        <th>Acción Correctiva</th>
+                        <th>Observación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Actuador de sello</td>
+                        <td>
+                            <select name="detalle_actuador">
+                                <option value="Sin detalle">Sin detalle</option>
+                                <option value="Con detalle">Con detalle</option>
+                                <option value="No se pudo revisar">No se pudo revisar</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="Diagnostico_actuador">
+                                <option value="Desgaste">Desgaste</option>
+                                <option value="Vida útil">Vida útil</option>
+                                <option value="Problema operacional">Problema operacional</option>
+                                <option value="Óxido o humedad">Óxido o humedad</option>
+                                <option value="Condición externa">Condición externa</option>
+                                <option value="No aplica">No aplica</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="accion_correctiva_actuador">
+                                <option value="Reparación">Reparación</option>
+                                <option value="Reemplazo">Reemplazo</option>
+                                <option value="Se informó">Se informó</option>
+                                <option value="No aplica">No aplica</option>
+                            </select>
+                            
+                        </td>
+                        <td>
+                            <input type="text" id="observacion_actuador" name="observacion_actuador"placeholder="Escriba o seleccione una opción"value="Sin observacion">
+                        
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cintas de entrada</td>
+                        <td>
+                            <select name="detalle_cintas_entrada">
+                                <option value="sin detalle">Sin detalle</option>
+                                <option value="con detalle">Con detalle</option>
+                                <option value="No se pudo revisar">No se pudo revisar</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="Diagnostico_cintas_entrada">
+                                <option value="Desgaste">Desgaste</option>
+                                <option value="Vida util">Vida util</option>
+                                <option value="Problema opracional">Problema operacional</option>
+                                <option value="Oxido o humedad">Oxido o humedad</option>
+                                <option value="Condision externa">Condision externa</option>
+                                <option value="No aplica">No aplica</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="accion_correctiva_cintas_entrada">
+                                <option value="Reparacion">Reparacion</option>
+                                <option value="Reemplazo">Reemplazo</option>
+                                <option value="Se informo">Se informo</option>
+                                <option value="No aplica">No aplica</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" id="observacion_cintas_entrada" name="observacion_cintas_entrada"placeholder="Escriba o seleccione una opción"value="Sin observacion">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cintas de salida</td>
+                        <td>
+                            <select name="detalle_cintas_salida">
+                                <option value="sin detalle">Sin detalle</option>
+                                <option value="con detalle">Con detalle</option>
+                                <option value="No se pudo revisar">No se pudo revisar</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="Diagnostico_cintas_salida">
+                                <option value="Desgaste">Desgaste</option>
+                                <option value="Vida util">Vida util</option>
+                                <option value="Problema opracional">Problema operacional</option>
+                                <option value="Oxido o humedad">Oxido o humedad</option>
+                                <option value="Condision externa">Condision externa</option>
+                                <option value="No aplica">No aplica</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="accion_correctiva_cintas_salida">
+                                <option value="Reparacion">Reparacion</option>
+                                <option value="Reemplazo">Reemplazo</option>
+                                <option value="Se informo">Se informo</option>
+                                <option value="No aplica">No aplica</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" id="observacion_cintas_salida" name="observacion_cintas_salida"placeholder="Escriba o seleccione una opción"value="Sin observacion">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tablero</td>
+                        <td>
+                            <select name="detalle_tablero">
+                                <option value="sin detalle">Sin detalle</option>
+                                <option value="con detalle">Con detalle</option>
+                                <option value="No se pudo revisar">No se pudo revisar</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="Diagnostico_tablero">
+                                <option value="Desgaste">Desgaste</option>
+                                <option value="Vida util">Vida util</option>
+                                <option value="Problema opracional">Problema operacional</option>
+                                <option value="Oxido o humedad">Oxido o humedad</option>
+                                <option value="Condision externa">Condision externa</option>
+                                <option value="No aplica">No aplica</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="accion_correctiva_tablero">
+                                <option value="Reparacion">Reparacion</option>
+                                <option value="Reemplazo">Reemplazo</option>
+                                <option value="Se informo">Se informo</option>
+                                <option value="No aplica">No aplica</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" id="observacion_tablero" name="observacion_tablero"placeholder="Escriba o seleccione una opción"value="Sin observacion">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Matriz</td>
+                        <td>
+                            <select name="detalle_matriz">
+                                <option value="sin detalle">Sin detalle</option>
+                                <option value="con detalle">Con detalle</option>
+                                <option value="No se pudo revisar">No se pudo revisar</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="Diagnostico_matriz">
+                                <option value="Desgaste">Desgaste</option>
+                                <option value="Vida util">Vida util</option>
+                                <option value="Problema opracional">Problema operacional</option>
+                                <option value="Oxido o humedad">Oxido o humedad</option>
+                                <option value="Condision externa">Condision externa</option>
+                                <option value="No aplica">No aplica</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="accion_correctiva_matriz">
+                                <option value="Reparacion">Reparacion</option>
+                                <option value="Reemplazo">Reemplazo</option>
+                                <option value="Se informo">Se informo</option>
+                                <option value="No aplica">No aplica</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" id="observacion_matriz" name="observacion_matriz" placeholder="Escriba o seleccione una opción" value="Sin observación">
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Pantalla HMI</td>
+                        <td>
+                            <select name="detalle_pantalla_hmi">
+                                <option value="sin detalle">Sin detalle</option>
+                                <option value="con detalle">Con detalle</option>
+                                <option value="No se pudo revisar">No se pudo revisar</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="Diagnostico_pantalla_hmi">
+                                <option value="Desgaste">Desgaste</option>
+                                <option value="Vida util">Vida util</option>
+                                <option value="Problema opracional">Problema operacional</option>
+                                <option value="Oxido o humedad">Oxido o humedad</option>
+                                <option value="Condision externa">Condision externa</option>
+                                <option value="No aplica">No aplica</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="accion_correctiva_pantalla_hmi">
+                                <option value="Reparacion">Reparacion</option>
+                                <option value="Reemplazo">Reemplazo</option>
+                                <option value="Se informo">Se informo</option>
+                                <option value="No aplica">No aplica</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" id="observacion_pantalla_hmi" name="observacion_pantalla_hmi"placeholder="Escriba o seleccione una opción"value="Sin observacion">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Rebobinador de film</td>
+                        <td>
+                            <select name="detalle_rebobinador_de_film">
+                                <option value="sin detalle">Sin detalle</option>
+                                <option value="con detalle">Con detalle</option>
+                                <option value="No se pudo revisar">No se pudo revisar</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="Diagnostico_rebobinador_de_film">
+                                <option value="Desgaste">Desgaste</option>
+                                <option value="Vida util">Vida util</option>
+                                <option value="Problema opracional">Problema operacional</option>
+                                <option value="Oxido o humedad">Oxido o humedad</option>
+                                <option value="Condision externa">Condision externa</option>
+                                <option value="No aplica">No aplica</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="accion_correctiva_rebobinador_de_film">
+                                <option value="Reparacion">Reparacion</option>
+                                <option value="Reemplazo">Reemplazo</option>
+                                <option value="Se informo">Se informo</option>
+                                <option value="No aplica">No aplica</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" id="observacion_rebobinador_de_film" name="observacion_rebobinador_de_film" placeholder="Escriba o seleccione una opción"value="Sin observacion">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Alimentacion de film</td>
+                        <td>
+                            <select name="detalle_alimentacion_de_film">
+                                <option value="sin detalle">Sin detalle</option>
+                                <option value="con detalle">Con detalle</option>
+                                <option value="No se pudo revisar">No se pudo revisar</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="Diagnostico_alimentacion_de_film">
+                                <option value="Desgaste">Desgaste</option>
+                                <option value="Vida util">Vida util</option>
+                                <option value="Problema opracional">Problema operacional</option>
+                                <option value="Oxido o humedad">Oxido o humedad</option>
+                                <option value="Condision externa">Condision externa</option>
+                                <option value="No aplica">No aplica</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="accion_correctiva_alimentacion_de_film">
+                                <option value="Reparacion">Reparacion</option>
+                                <option value="Reemplazo">Reemplazo</option>
+                                <option value="Se informo">Se informo</option>
+                                <option value="No aplica">No aplica</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" id="observacion_alimentacion_de_film" name="observacion_alimentacion_de_film" placeholder="Escriba o seleccione una opción"value="Sin observacion">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Estacion de sello</td>
+                        <td>
+                            <select name="detalle_estacion_de_sello">
+                                <option value="sin detalle">Sin detalle</option>
+                                <option value="con detalle">Con detalle</option>
+                                <option value="No se pudo revisar">No se pudo revisar</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="Diagnostico_estacion_de_sello">
+                                <option value="Desgaste">Desgaste</option>
+                                <option value="Vida util">Vida util</option>
+                                <option value="Problema opracional">Problema operacional</option>
+                                <option value="Oxido o humedad">Oxido o humedad</option>
+                                <option value="Condision externa">Condision externa</option>
+                                <option value="No aplica">No aplica</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="accion_correctiva_estacion_de_sello">
+                                <option value="Reparacion">Reparacion</option>
+                                <option value="Reemplazo">Reemplazo</option>
+                                <option value="Se informo">Se informo</option>
+                                <option value="No aplica">No aplica</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" id="observacion_estacion_de_sello" name="observacion_estacion_de_sello" placeholder="Escriba o seleccione una opción" value="Sin observacion">
+        
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Observación Final -->
+            
+            <label for="observacion_final">Observación:</label>
+            <textarea id="observacion_final" name="observacion_final" rows="5"></textarea>
+
+             <!-- Recuadros para insertar imágenes -->
+             <div class="container1">
+             <h2>Registro Fotográfico</h2>
+             </div>
+
+             <div id="image-upload-container" class="image-upload">
+                <div>
+                    <label for="imagen6">Imagen 6</label>
+                    <input type="file" id="imagen6" name="imagen6" accept="image/*" onchange="previewImage(event, 'preview6')">
+                    <img id="preview6" alt="Previsualización de la imagen">
+                    <input type="text" id="texto_imagen6" placeholder="Texto para la Imagen 6">
+                </div>
+                <div>
+                    <label for="imagen7">Imagen 7</label>
+                    <input type="file" id="imagen7" name="imagen7" accept="image/*" onchange="previewImage(event, 'preview7')">
+                    <img id="preview7" alt="Previsualización de la imagen">
+                    <input type="text" id="texto_imagen7" placeholder="Texto para la Imagen 7">
+                </div>
+                <div>
+                    <label for="imagen8">Imagen 8</label>
+                    <input type="file" id="imagen8" name="imagen8" accept="image/*" onchange="previewImage(event, 'preview8')">
+                    <img id="preview8" alt="Previsualización de la imagen">
+                    <input type="text" id="texto_imagen8" placeholder="Texto para la Imagen 8">
+                </div>
+                <div>
+                    <label for="imagen9">Imagen 9</label>
+                    <input type="file" id="imagen9" name="imagen9" accept="image/*" onchange="previewImage(event, 'preview9')">
+                    <img id="preview9" alt="Previsualización de la imagen">
+                    <input type="text" id="texto_imagen9" placeholder="Texto para la Imagen 9">
+                </div>
+                <div>
+                    <label for="imagen10">Imagen 10</label>
+                    <input type="file" id="imagen10" name="imagen10" accept="image/*" onchange="previewImage(event, 'preview10')">
+                    <img id="preview10" alt="Previsualización de la imagen">
+                    <input type="text" id="texto_imagen10" placeholder="Texto para la Imagen 10">
+                </div>
+                <div>
+                    <label for="imagen11">Imagen 11</label>
+                    <input type="file" id="imagen11" name="imagen11" accept="image/*" onchange="previewImage(event, 'preview11')">
+                    <img id="preview11" alt="Previsualización de la imagen">
+                    <input type="text" id="texto_imagen11" placeholder="Texto para la Imagen 11">
+                </div>
+                
+             </div>
+
+
+             <!-- Botón para agregar más imágenes -->
+             <h2><button type="button" id="agregarImagenes">Agregar más imágenes</button></h2>
+
+             <!-- Campo para la conclusión -->
+             <div class="container1">
+            <h2><label for="conclusion">Conclusión:</label></h2>
+             </div>
+
+            <textarea id="conclusion" rows="4" cols="50"></textarea>
+
+            <div class="container1">
+             <h2>
+             <label for="nombre_documento">Nombre del documento:</label> 
+            </h2>
+            </div>
+            <div>
+             <input type="text" id="nombre_documento" name="nombre_documento" placeholder="Ingrese el nombre del documento" required>
+            </div>
+            <!-- Botón para generar PDF -->
+           <h2> <button type="button" id="generarPDF">Descargar Informe</button> </h2>
+
+           
+        </form>
+    </div>
+
+    <script>
+        let imagenCount = 11; // Contador inicial de imágenes
+
+// Función para previsualizar la imagen cargada
+function previewImage(event, previewId) {
+    const reader = new FileReader();
+    reader.onload = function() {
+        const output = document.getElementById(previewId);
+        output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+// Función para crear un campo de imagen
+function crearCampoImagen(numero) {
+    const div = document.createElement('div');
+    div.classList.add('image-upload-adicional');
+
+    div.innerHTML = `
+        <label for="imagen${numero}">Imagen ${numero}</label>
+        <input type="file" id="imagen${numero}" name="imagen${numero}" accept="image/*" onchange="previewImage(event, 'preview${numero}')">
+        <img id="preview${numero}" alt="Previsualización de la imagen">
+        <input type="text" id="texto_imagen${numero}" name="texto_imagen${numero}" placeholder="Texto para la Imagen ${numero}">
+    `;
+
+    return div;
+}
+
+const maxImagenes = 20;
+
+// Manejador del evento para agregar más imágenes
+document.getElementById('agregarImagenes').addEventListener('click', function() {
+    const container = document.getElementById('image-upload-container');
+    const numeroDeImagenesAAgregar = 2; // Puedes cambiar esto según tus necesidades
+
+    if (imagenCount + numeroDeImagenesAAgregar > maxImagenes) {
+        alert(`Solo puedes agregar hasta ${maxImagenes} imágenes.`);
+        return;
+    }
+
+    for (let i = 0; i < numeroDeImagenesAAgregar; i++) {
+        imagenCount++;
+        const nuevoCampoImagen = crearCampoImagen(imagenCount);
+        container.appendChild(nuevoCampoImagen);
+    }
+});
+
+
+    </script>
+
+    <script src="PDF_proseal.js"></script>
+
+</body>
+</html>

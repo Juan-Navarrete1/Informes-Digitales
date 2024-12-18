@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Informe Emergencia</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<div class="container">
+    <form id="formularioServicio" action="procesar_formulario.php" method="post" enctype="multipart/form-data">
+        <h1>INFORME EMERGENCIA</h1>
+
+        <!-- Agrupamos los campos en filas de tres -->
+        <div class="horizontal-fields">
+            <div class="form-group">
+                <label for="planta">Planta:</label>
+                <input list="plantas" id="planta" name="planta" placeholder="Escriba o seleccione..." required>
+                <datalist id="plantas">
+                    <option value="Sopraval"></option>
+                    <option value="Lo miranda cerdo"></option>
+                    <option value="Lo miranda aves"></option>
+                    <option value="San Vicente"></option>
+                    <option value="Walmart"></option>
+                    <option value="Chile Beef"></option>
+                    <option value="Castaño"></option>
+                    <option value="Don Pollo"></option>
+                </datalist>
+            </div>
+
+            <div class="form-group">
+                <label for="tipo_servicio">Tipo de Servicio:</label>
+                <input list="tipos_servicio" id="tipo_servicio" name="tipo_servicio" placeholder="Escriba o seleccione..." required>
+                <datalist id="tipos_servicio">
+                    <option value="Informe emergencia"></option>
+                    <option value="Plan de continuidad"></option>
+                    <option value="Mantenimiento"></option>
+                    <option value="Reparación"></option>
+                    <option value="Instalación"></option>
+                    <option value="Asistencia programada"></option>
+                    <option value="Puesta en marcha"></option>
+                </datalist>
+            </div>
+
+            <div class="form-group">
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha" name="fecha" required>
+            </div>
+        </div>
+
+        <div class="horizontal-fields">
+            <div class="form-group">
+                <label for="modelo">Modelo:</label>
+                <input list="modelos" id="modelo" name="modelo" placeholder="Escriba o seleccione..." required>
+                <datalist id="modelos">
+                    <option value="GTR"></option>
+                    <option value="GTRe"></option>
+                    <option value="GT0"></option>
+                    <option value="GT0s"></option>
+                    <option value="GT1"></option>
+                    <option value="GT1s"></option>
+                    <option value="GT1e"></option>
+                    <option value="GT2"></option>
+                    <option value="GT2 TWIN"></option>
+                    <option value="GT5 TWIN"></option>
+                    <option value="Nobac 500"></option>
+                    <option value="Nobac 500"></option>
+                    <option value="RF 2x85 KW"></option>
+                </datalist>
+           
+        </div>
+        
+
+            <div class="form-group">
+                <label for="numero_serie">N.º de Serie:</label>
+                <input type="text" id="numero_serie" name="numero_serie" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Maquina">Máquina:</label>
+                <input list="maquinas" id="Maquina" name="Maquina" placeholder="Escriba o seleccione..." required>
+                <datalist id="maquinas">
+                    <option value="Termoselladora"></option>
+                    <option value="Etiquetadora"></option>
+                    <option value="Stalam"></option>
+                </datalist>
+            </div>
+        </div>
+
+        <div class="horizontal-fields">
+            <div class="form-group">
+                <label for="Marca">Marca:</label>
+                <input list="marcas" id="Marca" name="Marca" placeholder="Escriba o seleccione..." required>
+                <datalist id="marcas">
+                    <option value="Proseal"></option>
+                    <option value="Ravenwood"></option>
+                    <option value="Stalam"></option>
+                </datalist>
+            
+        </div>
+        
+
+            <div class="form-group">
+                <label for="Año">Año:</label>
+                <input type="text" id="Año" name="Año" required>
+            </div>
+        </div>
+
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" name="descripcion" rows="4" cols="50" placeholder="Ingrese la descripción aquí..."></textarea><br>
+
+        <div class="image-upload">
+            <div>
+                <label for="imagen5">Máquina a inspeccionar</label>
+                <input type="file" id="imagen5" name="imagen5" accept="image/*" onchange="previewImage(event, 'preview5')">
+                <img id="preview5" alt="Previsualización de la imagen" style="display:none;">
+            </div>
+        </div>
+         
+        <label for="Solicitud">Solicitud:</label>
+        <textarea id="Solicitud" name="Solicitud" rows="4" cols="50" placeholder="Ingrese la descripción aquí..."></textarea><br>
+
+        <label for="trabajo_desarrollado">trabajo desarrollado:</label>
+        <textarea id="trabajo_desarrollado" name="trabajo_desarrollado" rows="4" cols="50" placeholder="Ingrese la descripción aquí..."></textarea><br>
+
+
+        <!-- Recuadros para insertar imágenes -->
+        <div class="container1">
+            <h2>Registro Fotográfico</h2>
+        </div>
+
+        <div id="image-upload-container" class="image-upload">
+            <div>
+                <label for="imagen6">Imagen 6</label>
+                <input type="file" id="imagen6" name="imagen6" accept="image/*" onchange="previewImage(event, 'preview6')">
+                <img id="preview6" alt="Previsualización de la imagen" style="display:none;">
+                <input type="text" id="texto_imagen6" placeholder="Texto para la Imagen 6">
+            </div>
+            <div>
+                <label for="imagen7">Imagen 7</label>
+                <input type="file" id="imagen7" name="imagen7" accept="image/*" onchange="previewImage(event, 'preview7')">
+                <img id="preview7" alt="Previsualización de la imagen" style="display:none;">
+                <input type="text" id="texto_imagen7" placeholder="Texto para la Imagen 7">
+            </div>
+            <div>
+                <label for="imagen8">Imagen 8</label>
+                <input type="file" id="imagen8" name="imagen8" accept="image/*" onchange="previewImage(event, 'preview8')">
+                <img id="preview8" alt="Previsualización de la imagen" style="display:none;">
+                <input type="text" id="texto_imagen8" placeholder="Texto para la Imagen 8">
+            </div>
+            <div>
+                <label for="imagen9">Imagen 9</label>
+                <input type="file" id="imagen9" name="imagen9" accept="image/*" onchange="previewImage(event, 'preview9')">
+                <img id="preview9" alt="Previsualización de la imagen" style="display:none;">
+                <input type="text" id="texto_imagen9" placeholder="Texto para la Imagen 9">
+            </div>
+            <div>
+                <label for="imagen10">Imagen 10</label>
+                <input type="file" id="imagen10" name="imagen10" accept="image/*" onchange="previewImage(event, 'preview10')">
+                <img id="preview10" alt="Previsualización de la imagen" style="display:none;">
+                <input type="text" id="texto_imagen10" placeholder="Texto para la Imagen 10">
+            </div>
+            <div>
+                <label for="imagen11">Imagen 11</label>
+                <input type="file" id="imagen11" name="imagen11" accept="image/*" onchange="previewImage(event, 'preview11')">
+                <img id="preview11" alt="Previsualización de la imagen" style="display:none;">
+                <input type="text" id="texto_imagen11" placeholder="Texto para la Imagen 11">
+            </div>
+
+        </div>
+
+
+        <!-- Botón para agregar más imágenes -->
+        <h2><button type="button" id="agregarImagenes">Agregar más imágenes</button></h2>
+
+        <!-- Campo para la conclusión -->
+        <div class="container1">
+            <h2><label for="conclusion">Conclusión:</label></h2>
+        </div>
+
+        <textarea id="conclusion" name="conclusion" rows="4" cols="50"></textarea>
+
+        <div class="container1">
+            <h2>
+                <label for="nombre_documento">Nombre del documento:</label>
+            </h2>
+        </div>
+        <div>
+            <input type="text" id="nombre_documento" name="nombre_documento" placeholder="Ingrese el nombre del documento" required>
+        </div>
+        <!-- Botón para generar PDF -->
+        <h2><button type="button" id="generarPDF">Descargar Informe</button></h2>
+
+
+    </form>
+</div>
+
+<!-- Script para previsualizar imágenes y agregar más campos de imagen -->
+<script>
+    let imagenCount = 11; // Contador inicial de imágenes
+
+    // Función para previsualizar la imagen cargada
+    function previewImage(event, previewId) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const output = document.getElementById(previewId);
+            output.src = reader.result;
+            output.style.display = 'block'; // Mostrar la imagen al cargarla
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // Función para crear un campo de imagen
+    function crearCampoImagen(numero) {
+        const div = document.createElement('div');
+        div.classList.add('image-upload-adicional');
+
+        div.innerHTML = `
+            <label for="imagen${numero}">Imagen ${numero}</label>
+            <input type="file" id="imagen${numero}" name="imagen${numero}" accept="image/*" onchange="previewImage(event, 'preview${numero}')">
+            <img id="preview${numero}" alt="Previsualización de la imagen" style="display:none;">
+            <input type="text" id="texto_imagen${numero}" name="texto_imagen${numero}" placeholder="Texto para la Imagen ${numero}">
+        `;
+
+        return div;
+    }
+
+    const maxImagenes = 20;
+
+    // Manejador del evento para agregar más imágenes
+    document.getElementById('agregarImagenes').addEventListener('click', function() {
+        const container = document.getElementById('image-upload-container');
+        const numeroDeImagenesAAgregar = 2; // Puedes cambiar esto según tus necesidades
+
+        if (imagenCount + numeroDeImagenesAAgregar > maxImagenes) {
+            alert(`Solo puedes agregar hasta ${maxImagenes} imágenes.`);
+            return;
+        }
+
+        for (let i = 0; i < numeroDeImagenesAAgregar; i++) {
+            imagenCount++;
+            const nuevoCampoImagen = crearCampoImagen(imagenCount);
+            container.appendChild(nuevoCampoImagen);
+        }
+    });
+</script>
+
+<!-- Incluye el script corregido para generar el PDF -->
+<script src="PDF_emergencia.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,335 @@
+/* General */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #e8f5e9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: left;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #b8e994 0%, #38ef7d 100%); /* Gradiente verde natural */
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animación de hover */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Alinear solo los campos específicos en horizontal, tres por fila */
+.horizontal-fields {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.horizontal-fields .form-group {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.horizontal-fields .form-group:last-child {
+    margin-right: 0;
+}
+
+/* Mantener el estilo original del resto de los elementos */
+form {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Evitar que el resto del formulario se vea afectado */
+textarea, label, select, input {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Ajustes generales para pantallas móviles */
+@media (max-width: 768px) {
+    h1{
+        font-size: 28px; /* Ajustar el tamaño del título en móviles */
+    }
+
+    /* Asegurar que los títulos como "Resumen Ejecutivo" se mantengan en una línea */
+    h2, h3 {
+        font-size: 20px;
+        text-align: center;
+        white-space: nowrap; /* Evita que se dividan en líneas múltiples */
+        overflow: hidden; /* Oculta cualquier desbordamiento */
+        text-overflow: ellipsis; /* Agrega "..." si el texto es demasiado largo */
+    }
+
+    /* Fuerza a que el contenedor de los títulos no afecte el comportamiento del texto */
+    h2, h3 {
+        display: inline-block; /* Asegura que el título se comporte como un solo bloque */
+        width: 100%; /* Que ocupe el 100% del espacio disponible */
+    }
+}
+
+.container1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+}
+
+.icon-button {
+    cursor: pointer;
+    font-size: 24px;
+    padding: 5px;
+    margin: 5px;
+}    
+
+
+/* Contenedor centrado */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-out;
+    position: relative;
+    z-index: 1;
+}
+
+/* Efecto de fondo decorativo */
+.container::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    bottom: -20px;
+    left: -20px;
+    z-index: -1;
+    background: linear-gradient(135deg, #38ef7d 0%, #11998e 100%); /* Verde y verde azulado */
+    border-radius: 20px;
+    filter: blur(15px);
+}
+
+
+
+/* Título */
+h1 {
+    width: 100%;
+    text-align: center;
+    color: #2d3e50;
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    position: relative;
+    animation: fadeIn 1.2s ease-out;
+}
+
+h1::before {
+    content: '';
+    width: 120px;
+    height: 5px;
+    background-color: #38ef7d; /* Verde ambiental */
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+}
+
+/* Formulario */
+form {
+    background-color: #ffffff;
+    padding: 60px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 850px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 1.3s ease-out;
+}
+
+label, input, textarea, select {
+    width: 100%;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+input, textarea, select {
+    padding: 15px;
+    border: 1px solid #bdc3c7;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: #f0f8f0; /* Color verde claro */
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(56, 239, 125, 0.3); /* Acento verde */
+}
+
+button, input[type="submit"] {
+    background-color: #38ef7d; /* Verde natural */
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    animation: fadeIn 1.5s ease-out;
+    align-self: flex-start;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #11998e; /* Verde más oscuro */
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+button:active, input[type="submit"]:active {
+    animation: pulse 0.5s;
+}
+
+/* Tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    background-color: #f9fafc;
+    transition: all 0.3s ease;
+    animation: fadeIn 1.6s ease-out;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+th {
+    background-color: #11998e; /* Verde azulado */
+    color: white;
+    text-transform: uppercase;
+}
+
+td input[type="text"], td select, td textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #bdc3c7;
+    font-size: 15px;
+    background-color: #ffffff;
+}
+
+/* Cuadros de imágenes */
+.image-upload {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 40px;
+    width: 100%;
+    box-sizing: border-box;
+    animation: fadeIn 1.7s ease-out;
+}
+
+.image-upload div {
+    flex: 1 1 calc(45% - 20px);
+    padding: 30px;
+    border: 2px dashed #2d3e50; /* Borde gris ambiental */
+    border-radius: 10px;
+    margin: 15px 0;
+    text-align: center;
+    background-color: #fafafa;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    box-sizing: border-box;
+}
+
+.image-upload div:hover {
+    background-color: #f0f8f0; /* Verde claro */
+    border-color: #38ef7d; /* Verde ambiental */
+    transform: scale(1.05);
+}
+
+.image-upload div label {
+    display: block;
+    font-weight: bold;
+    color: #2d3e50; /* Gris ambiental */
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+}
+
+.image-upload div label:hover {
+    color: #38ef7d; /* Verde ambiental */
+}
+
+.image-upload img {
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto;
+    border-radius: 10px;
+    display: none;
+    transition: transform 0.3s ease;
+}
+
+.image-upload img:hover {
+    transform: scale(1.1);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .image-upload div {
+        flex: 1 1 100%;
+    }
+
+    form {
+        padding: 40px;
+    }
+}

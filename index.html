@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Navegación Moderno</title>
+    <style>
+        /* Estilo general del cuerpo */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #1E293B, #334155);
+            color: #F1F5F9;
+            overflow-x: hidden;
+        }
+
+        /* Contenedor del logo */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo-container img {
+            width: 180px;
+            height: auto;
+        }
+
+        /* Estilo del botón para abrir/cerrar el sidebar */
+        .openbtn {
+            font-size: 22px;
+            cursor: pointer;
+            background-color: #1E293B;
+            color: #F1F5F9;
+            border: none;
+            padding: 10px 20px;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+            transition: 0.3s;
+        }
+
+        .openbtn:hover {
+            background-color: #FFA500;
+        }
+
+        /* Estilo del sidebar */
+        .sidebar {
+            height: 100%;
+            width: 260px;
+            position: fixed;
+            top: 0;
+            left: -260px;
+            background-color: #1E293B;
+            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.3);
+            overflow-x: hidden;
+            transition: 0.4s ease;
+            padding-top: 60px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 15px 25px;
+            font-size: 18px;
+            color: #F1F5F9;
+            text-decoration: none;
+            margin: 10px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #FFA500;
+            color: #1E293B;
+        }
+
+        /* Contenedor principal */
+        .main-content {
+            margin-left: 0;
+            transition: margin-left 0.4s;
+            padding: 40px;
+        }
+
+        /* Contenedor de íconos */
+        .icon-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 40px;
+        }
+
+        .icon {
+            background-color: #F1F5F9;
+            color: #1E293B;
+            border-radius: 10px;
+            padding: 20px;
+            width: 150px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .icon img {
+            width: 70px;
+            height: auto;
+            margin-bottom: 10px;
+            transition: transform 0.6s;
+        }
+
+        .icon:hover {
+            transform: translateY(-10px);
+            background-color: #FFA500;
+            color: #F1F5F9;
+        }
+
+        .icon:hover img {
+            transform: rotate(360deg);
+        }
+
+        .icon p {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* Efectos de transición para el sidebar */
+        #sidebar.active {
+            left: 0;
+        }
+
+        #main-content.shifted {
+            margin-left: 260px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Botón para abrir/cerrar el sidebar -->
+    <button class="openbtn" onclick="toggleSidebar()">☰ Menú</button>
+
+    <!-- Contenedor del logo -->
+    <div class="logo-container">
+        <img src="/imagenes/sma.svg" alt="Logo de la Empresa">
+    </div>
+
+    <!-- Barra lateral (Sidebar) -->
+    <div id="sidebar" class="sidebar">
+        <a href="informeproseal.html" target="_blank">Informe Termoselladora</a>
+        <a href="infoemergencia.html" target="_blank">Informe Emergencia</a>
+        <a href="Osdeservicio.html" target="_blank">Orden de Servicio</a>
+        <a href="Informenobac.html" target="_blank">Informe Etiquetadora</a>
+        <a href="InformeStalam.html" target="_blank">Informe Stalam</a>
+        </a>
+    </div>
+
+    <!-- Contenido principal -->
+    <div id="main-content" class="main-content icon-container">
+        <div class="icon">
+            <a href="informeproseal.html" target="_blank">
+                <img src="iconopdf.png" alt="Informe PDF">
+                <p>Informe Termoselladora</p>
+            </a>
+        </div>
+        <div class="icon">
+            <a href="infoemergencia.html" target="_blank">
+                <img src="iconopdf.png" alt="Emergencia PDF">
+                <p>Informe de Emergencia</p>
+            </a>
+        </div>
+        <div class="icon">
+            <a href="Osdeservicio.html" target="_blank">
+                <img src="iconopdf.png" alt="Os de Servicio PDF">
+                <p>Orden de Servicio</p>
+            </a>
+        </div>
+        <div class="icon">
+            <a href="Informenobac.html" target="_blank">
+                <img src="iconopdf.png" alt="Informe Etiquetadora PDF">
+                <p>Informe Etiquetadora</p>
+            </a>
+        </div>
+        <div class="icon">
+            <a href="InformeStalam.html" target="_blank">
+                <img src="iconopdf.png" alt="Informe Stalam PDF">
+                <p>Informe Stalam</p>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            sidebar.classList.toggle('active');
+            mainContent.classList.toggle('shifted');
+        }
+    </script>
+</body>
+</html>
